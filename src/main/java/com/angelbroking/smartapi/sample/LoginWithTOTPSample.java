@@ -1,27 +1,41 @@
 package com.angelbroking.smartapi.sample;
 
-import com.angelbroking.smartapi.SmartConnect;
-import com.angelbroking.smartapi.http.exceptions.SmartAPIException;
-import com.angelbroking.smartapi.models.User;
+import com.angelbroking.smartapi.models.MarketDataDTO;
+import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
-import java.net.Proxy;
-
-import static com.angelbroking.smartapi.utils.Constants.TIME_OUT_IN_MILLIS;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Slf4j
 public class LoginWithTOTPSample {
 
-	public static void main(String[] args) throws SmartAPIException, IOException {
-		String clientID = System.getProperty("clientID");
-		String clientPass = System.getProperty("clientPass");
-		String apiKey = System.getProperty("apiKey");
-		String totp = System.getProperty("totp");
-		Proxy proxy = Proxy.NO_PROXY;
-		SmartConnect smartConnect = new SmartConnect(apiKey,proxy,TIME_OUT_IN_MILLIS);
-		User user = smartConnect.generateSession(clientID, clientPass, totp);
-		String feedToken = user.getFeedToken();
-		log.info(feedToken);
+		public static void main(String[] args) {
+			MarketDataDTO marketDataDTO = new MarketDataDTO();
+
+			// Set the mode
+			marketDataDTO.setMode("FULL");
+
+			// Create a map for exchange tokens
+			Map<String, List<String>> exchangeTokens = new HashMap<>();
+
+			// Create a list of tokens for NSE exchange
+			List<String> nseTokens = new ArrayList<>();
+			nseTokens.add("3045");
+
+			// Add the NSE tokens list to the exchangeTokens map
+			exchangeTokens.put("NSE", nseTokens);
+
+			// Set the exchangeTokens map
+			marketDataDTO.setExchangeTokens(exchangeTokens);
+
+			// Print the DTO object to verify the values
+			System.out.println(marketDataDTO);
+			// Print the DTO object
+			System.out.println("marketDataDTO: "+marketDataDTO);
+			System.out.println("json: "+new Gson().toJson(marketDataDTO));
 	}
+
 }

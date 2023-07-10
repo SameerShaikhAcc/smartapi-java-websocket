@@ -8,6 +8,7 @@ import com.angelbroking.smartapi.http.response.HttpResponse;
 import com.angelbroking.smartapi.http.response.UserResponseDTO;
 import com.angelbroking.smartapi.models.GttParams;
 import com.angelbroking.smartapi.models.GttRuleParams;
+import com.angelbroking.smartapi.models.MarketDataDTO;
 import com.angelbroking.smartapi.models.OrderParams;
 import com.angelbroking.smartapi.models.SmartConnectParams;
 import com.angelbroking.smartapi.models.User;
@@ -38,6 +39,7 @@ import static com.angelbroking.smartapi.utils.Constants.SMART_CONNECT_API_GTT_DE
 import static com.angelbroking.smartapi.utils.Constants.SMART_CONNECT_API_GTT_LIST;
 import static com.angelbroking.smartapi.utils.Constants.SMART_CONNECT_API_GTT_MODIFY;
 import static com.angelbroking.smartapi.utils.Constants.SMART_CONNECT_API_LTP_DATA;
+import static com.angelbroking.smartapi.utils.Constants.SMART_CONNECT_API_MARKET_DATA;
 import static com.angelbroking.smartapi.utils.Constants.SMART_CONNECT_API_ORDER_BOOK;
 import static com.angelbroking.smartapi.utils.Constants.SMART_CONNECT_API_ORDER_CANCEL;
 import static com.angelbroking.smartapi.utils.Constants.SMART_CONNECT_API_ORDER_MODIFY;
@@ -526,6 +528,23 @@ public class SmartConnect {
             throw new JSONException(String.format("%s in getting candle data %s", JSON_EXCEPTION_ERROR_MSG, ex.getMessage()));
         } catch (SmartAPIException ex) {
             log.error("{} while getting candle data {}", SMART_API_EXCEPTION_OCCURRED, ex.toString());
+            throw new SmartAPIException(String.format("%s in getting candle data %s", SMART_API_EXCEPTION_ERROR_MSG, ex));
+
+        }
+    }
+
+    public HttpResponse marketData(MarketDataDTO params) throws SmartAPIException, IOException {
+        String url = routes.get(SMART_CONNECT_API_MARKET_DATA);
+        try {
+            return smartAPIRequestHandler.postRequest(smartConnectParams.getApiKey(), url, new Gson().toJson(params), smartConnectParams.getAccessToken());
+        } catch (IOException ex) {
+            log.error("{} while getting market Data {}", IO_EXCEPTION_OCCURRED, ex.getMessage());
+            throw new IOException(String.format("%s in getting candle data %s", IO_EXCEPTION_ERROR_MSG, ex.getMessage()));
+        } catch (JSONException ex) {
+            log.error("{} while getting market Data {}", JSON_EXCEPTION_OCCURRED, ex.getMessage());
+            throw new JSONException(String.format("%s in getting candle data %s", JSON_EXCEPTION_ERROR_MSG, ex.getMessage()));
+        } catch (SmartAPIException ex) {
+            log.error("{} while getting market Data {}", SMART_API_EXCEPTION_OCCURRED, ex.toString());
             throw new SmartAPIException(String.format("%s in getting candle data %s", SMART_API_EXCEPTION_ERROR_MSG, ex));
 
         }

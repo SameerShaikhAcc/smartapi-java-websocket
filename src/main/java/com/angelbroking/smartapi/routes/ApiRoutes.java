@@ -53,5 +53,7 @@ public class ApiRoutes {
         ROUTES.put("api.gtt.list", sb.append(SECURE_COMMON_PATH).append("/gtt/v1/ruleList").toString());
         sb.setLength(0);
         ROUTES.put("api.candle.data", sb.append(SECURE_COMMON_PATH).append("/historical/v1/getCandleData").toString());
+        sb.setLength(0);
+        ROUTES.put("api.market.data", sb.append(SECURE_COMMON_PATH).append("/market/v1/quote").toString());
     }
 }

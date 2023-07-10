@@ -88,6 +88,7 @@ public class Constants {
     public static final String SMART_CONNECT_API_GTT_LIST = "api.gtt.list";
     public static final String SMART_CONNECT_API_CANDLE_DATA = "api.candle.data";
     public static final String SMART_CONNECT_API_USER_LOGOUT = "api.user.logout";
+    public static final String SMART_CONNECT_API_MARKET_DATA = "api.market.data";
     /**
      * Order model Constants
      */

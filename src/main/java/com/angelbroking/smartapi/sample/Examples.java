@@ -6,13 +6,16 @@ import com.angelbroking.smartapi.dto.TradeRequestDTO;
 import com.angelbroking.smartapi.http.exceptions.SmartAPIException;
 import com.angelbroking.smartapi.http.response.HttpResponse;
 import com.angelbroking.smartapi.models.GttParams;
+import com.angelbroking.smartapi.models.MarketDataDTO;
 import com.angelbroking.smartapi.models.OrderParams;
 import com.angelbroking.smartapi.models.User;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.angelbroking.smartapi.utils.Constants.MARGIN;
 import static com.angelbroking.smartapi.utils.Constants.SYMBOL_SBINEQ;
@@ -319,6 +322,23 @@ public class Examples {
         log.info("getCandleData {}", response);
     }
 
+    public void getMarketData(SmartConnect smartConnect) throws SmartAPIException, IOException {
+        MarketDataDTO marketDataDTO = new MarketDataDTO();
+        // Set the mode
+        marketDataDTO.setMode("LTP");
+        // Create a map for exchange tokens
+        Map<String, List<String>> exchangeTokens = new HashMap<>();
+        // Create a list of tokens for NSE exchange
+        List<String> nseTokens = new ArrayList<>();
+        nseTokens.add("3045");
+        // Add the NSE tokens list to the exchangeTokens map
+        exchangeTokens.put("NSE", nseTokens);
+        // Set the exchangeTokens map
+        marketDataDTO.setExchangeTokens(exchangeTokens);
+        HttpResponse response = smartConnect.marketData(marketDataDTO);
+        log.info("getMarketData {}", response);
+    }
+
     /**
      * Logout user.
      */
@@ -327,4 +347,5 @@ public class Examples {
         log.info("logout {}", httpResponse);
     }
 
+   
 }

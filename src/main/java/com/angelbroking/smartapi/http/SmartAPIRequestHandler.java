@@ -296,6 +296,7 @@ public class SmartAPIRequestHandler {
     public Request createPostRequest(String privateKey, String url, String params, String accessToken) {
         try {
 
+
             MediaType jsonMediaType = MediaType.parse(Constants.APPLICATION_JSON_UTF8);
             RequestBody body = RequestBody.create(params, jsonMediaType);
             return new Request.Builder().url(url).post(body).header(Constants.CONTENT_TYPE, Constants.APPLICATION_JSON).header(Constants.AUTHORIZATION, String.format("Bearer %s", accessToken)).header(Constants.CLIENT_LOCAL_IP, apiheader.getHeaderClientLocalIP()).header(Constants.CLIENT_PUBLIC_IP, apiheader.getHeaderClientPublicIP()).header(Constants.X_MAC_ADDRESS, apiheader.getMacAddress()).header(Constants.ACCEPT, apiheader.getAccept()).header(Constants.PRIVATE_KEY, privateKey).header(Constants.X_USER_TYPE, apiheader.getUserType()).header(Constants.X_SOURCE_ID, apiheader.getSourceID()).build();
