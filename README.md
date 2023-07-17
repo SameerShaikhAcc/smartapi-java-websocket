@@ -262,6 +262,29 @@ Smart API is a set of REST-like APIs that expose many capabilities required to b
             requestDTO.setFromDate("2021-02-10 09:15");
             HttpResponse response = smartConnect.candleData(requestDTO);
             }
+
+/** Market Data */
+    public void getMarketData(SmartConnect smartConnect) throws SmartAPIException, IOException {
+            MarketDataDTO marketDataDTO = new MarketDataDTO();
+        
+            // Set the mode
+            marketDataDTO.setMode("LTP");
+        
+            // Create a map for exchange tokens
+            Map<String, List<String>> exchangeTokens = new HashMap<>();
+        
+            // Create a list of tokens for NSE exchange
+            List<String> nseTokens = new ArrayList<>();
+            nseTokens.add("3045");
+        
+            // Add the NSE tokens list to the exchangeTokens map
+            exchangeTokens.put("NSE", nseTokens);
+        
+            // Set the exchangeTokens map
+            marketDataDTO.setExchangeTokens(exchangeTokens);
+        
+            HttpResponse response = smartConnect.marketData(marketDataDTO);
+            }
 	
 	/** Logout user. */
     public void logout(SmartConnect smartConnect) throws SmartAPIException, IOException {

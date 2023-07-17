@@ -322,6 +322,9 @@ public class Examples {
         log.info("getCandleData {}", response);
     }
 
+    /**
+     * Market Data
+     */
     public void getMarketData(SmartConnect smartConnect) throws SmartAPIException, IOException {
         MarketDataDTO marketDataDTO = new MarketDataDTO();
         // Set the mode

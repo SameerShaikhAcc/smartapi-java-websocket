@@ -539,14 +539,13 @@ public class SmartConnect {
             return smartAPIRequestHandler.postRequest(smartConnectParams.getApiKey(), url, new Gson().toJson(params), smartConnectParams.getAccessToken());
         } catch (IOException ex) {
             log.error("{} while getting market Data {}", IO_EXCEPTION_OCCURRED, ex.getMessage());
-            throw new IOException(String.format("%s in getting candle data %s", IO_EXCEPTION_ERROR_MSG, ex.getMessage()));
+            throw new IOException(String.format("%s in getting market data %s", IO_EXCEPTION_ERROR_MSG, ex.getMessage()));
         } catch (JSONException ex) {
             log.error("{} while getting market Data {}", JSON_EXCEPTION_OCCURRED, ex.getMessage());
-            throw new JSONException(String.format("%s in getting candle data %s", JSON_EXCEPTION_ERROR_MSG, ex.getMessage()));
+            throw new JSONException(String.format("%s in getting market data %s", JSON_EXCEPTION_ERROR_MSG, ex.getMessage()));
         } catch (SmartAPIException ex) {
             log.error("{} while getting market Data {}", SMART_API_EXCEPTION_OCCURRED, ex.toString());
-            throw new SmartAPIException(String.format("%s in getting candle data %s", SMART_API_EXCEPTION_ERROR_MSG, ex));
-
+            throw new SmartAPIException(String.format("%s in getting market data %s", SMART_API_EXCEPTION_ERROR_MSG, ex));
         }
     }
 
