@@ -9,6 +9,7 @@ import com.angelbroking.smartapi.models.Order;
 import com.angelbroking.smartapi.models.OrderParams;
 import com.angelbroking.smartapi.models.TokenSet;
 import com.angelbroking.smartapi.models.User;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,6 +19,9 @@ import java.io.IOException;
 import java.net.Proxy;
 import java.util.List;
 
+import static com.angelbroking.smartapi.utils.Constants.*;
+
+@Slf4j
 public class SmartConnect {
 	public static SessionExpiryHook sessionExpiryHook = null;
 	public static boolean ENABLE_LOGGING = false;
@@ -709,14 +713,19 @@ public class SmartConnect {
 	 * @param params is market data params.
 	 * @return returns the details of market data.
 	 */
-	public JSONObject marketData(JSONObject params) {
+	public JSONObject marketData(JSONObject params) throws SmartAPIException {
 		try{
 			String url = routes.get("api.market.data");
 			JSONObject response = smartAPIRequestHandler.postRequest(this.apiKey, url, params, accessToken);
 			return response.getJSONObject("data");
-		}catch (Exception | SmartAPIException e) {
-			System.out.println(e.getMessage());
-			return null;
+		}
+		catch (SmartAPIException e) {
+			log.error("{} while marketData {}", SMART_API_EXCEPTION_OCCURRED, e.toString());
+			throw new SmartAPIException(String.format("%s in marketData %s", SMART_API_EXCEPTION_ERROR_MSG, e));
+		}
+		catch (Exception ex) {
+			log.error("{} Exception {}", EXCEPTION, ex.toString());
+			throw new SmartAPIException(String.format("%s Exception %s", EXCEPTION, ex));
 		}
 	}
 

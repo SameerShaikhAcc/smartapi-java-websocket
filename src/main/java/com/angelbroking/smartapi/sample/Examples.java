@@ -273,7 +273,14 @@ public class Examples {
 	}
 
     /** Market Data */
-    public void getMarketData(SmartConnect smartConnect) {
+	/**
+	 * @param smartConnect describes functionalities for interacting with the Angel Broking Smart API to manage trading and market-related operations.
+	 * This describes all the modes of market data
+	 *                      e.g., payload.put("mode", "FULL");
+	 *                       payload.put("mode", "LTP");
+	 *                       payload.put("mode", "OHLC");
+	 */
+    public void getMarketData(SmartConnect smartConnect) throws SmartAPIException, IOException {
         // Create the payload object
         JSONObject payload = new JSONObject();
         payload.put("mode", "FULL");
