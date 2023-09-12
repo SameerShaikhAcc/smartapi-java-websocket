@@ -77,5 +77,8 @@ public class Constants {
     public static final int PRICE_OFFSET = 10;
     public static final int NUMBER_OF_ORDERS_OFFSET = 18;
     public static final int PRICE_CONVERSION_FACTOR = 100;
+    public static final String SMART_API_EXCEPTION_ERROR_MSG = "The operation failed to execute because of a SmartAPIException error";
+    public static final String SMART_API_EXCEPTION_OCCURRED = "SmartAPIException occurred ";
+    public static final String EXCEPTION = "An error occurred due to ";
 
 }
