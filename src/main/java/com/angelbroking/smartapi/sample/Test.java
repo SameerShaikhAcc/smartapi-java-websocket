@@ -19,14 +19,14 @@ public class Test {
 			/*
 			 * Set session expiry callback. smartConnect.setSessionExpiryHook(new
 			 * SessionExpiryHook() {
-			 * 
+			 *
 			 * @Override public void sessionExpired() {
 			 * System.out.println("session expired"); } });
-			 * 
+			 *
 			 * User user = smartConnect.generateSession("<clientId>", "<password>");
 			 * smartConnect.setAccessToken(user.getAccessToken());
 			 * smartConnect.setUserId(user.getUserId());
-			 * 
+			 *
 			 * /* token re-generate
 			 */
 			/*
@@ -39,7 +39,7 @@ public class Test {
 			/* System.out.println("getProfile"); */
 			examples.getProfile(smartConnect);
 
-			System.out.println("placeOrder");
+			/* System.out.println("placeOrder"); */
 			examples.placeOrder(smartConnect);
 
 			/* System.out.println("modifyOrder"); */
@@ -87,6 +87,9 @@ public class Test {
 			/* System.out.println("Historic candle Data"); */
 			examples.getCandleData(smartConnect);
 
+			/* System.out.println("Market Data"); */
+			examples.getMarketData(smartConnect);
+
 			/* System.out.println("logout"); */
 			examples.logout(smartConnect);
 
@@ -102,10 +105,10 @@ public class Test {
 			/*
 			 * String jwtToken = user.getAccessToken(); String apiKey = "smartapi_key";
 			 * String actionType = "subscribe"; String feedType = "order_feed";
-			 * 
+			 *
 			 * examples.smartWebSocketUsage(clientId, jwtToken, apiKey, actionType,
 			 * feedType);
-			 * 
+			 *
 			 */
 
 		} catch (Exception e) {
