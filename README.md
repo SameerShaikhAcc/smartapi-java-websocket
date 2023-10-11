@@ -172,7 +172,13 @@ SmartAPI is a set of REST-like APIs that expose many capabilities required to bu
 		// Returns Holding.
 		JSONObject response = smartConnect.getHolding();
 	}
-
+    
+        /** Get All Holdings */
+        public void getAllHolding(SmartConnect smartConnect) throws SmartAPIException, IOException {
+                // Returns All Holdings.
+                JSONObject response = smartConnect.getAllHolding();
+        }
+        
 	/** Get Position */
 	public void getPosition(SmartConnect smartConnect) throws SmartAPIException, IOException {
 		// Returns Position.
