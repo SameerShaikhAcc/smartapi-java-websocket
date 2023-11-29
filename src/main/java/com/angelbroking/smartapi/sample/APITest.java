@@ -129,6 +129,14 @@ public class APITest {
 			 *
 			 */
 
+			/* Order Websocket */
+			String userClientId = "<clientId>";
+			User userGenerateSession = smartConnect.generateSession("<clientId>", "<password>", "<totp>");
+			smartConnect.setAccessToken(userGenerateSession.getAccessToken());
+			smartConnect.setUserId(userGenerateSession.getUserId());
+			String accessToken = userGenerateSession.getAccessToken();
+
+			examples.orderUpdateUsage(accessToken);
 		} catch (Exception e) {
 			log.error("Exception: {}" , e.getMessage());
 			e.printStackTrace();

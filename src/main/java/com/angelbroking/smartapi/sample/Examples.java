@@ -3,11 +3,14 @@ package com.angelbroking.smartapi.sample;
 import com.angelbroking.smartapi.SmartConnect;
 import com.angelbroking.smartapi.http.exceptions.SmartAPIException;
 import com.angelbroking.smartapi.models.*;
+import com.angelbroking.smartapi.orderupdate.OrderUpdateListner;
+import com.angelbroking.smartapi.orderupdate.OrderUpdateWebsocket;
 import com.angelbroking.smartapi.smartTicker.SmartWSOnConnect;
 import com.angelbroking.smartapi.smartTicker.SmartWSOnDisconnect;
 import com.angelbroking.smartapi.smartTicker.SmartWSOnError;
 import com.angelbroking.smartapi.smartTicker.SmartWSOnTicks;
 import com.angelbroking.smartapi.smartTicker.SmartWebsocket;
+import com.angelbroking.smartapi.smartstream.models.SmartStreamError;
 import com.angelbroking.smartapi.ticker.OnConnect;
 import com.angelbroking.smartapi.ticker.OnTicks;
 import com.angelbroking.smartapi.ticker.SmartAPITicker;
@@ -433,5 +436,57 @@ public class Examples {
 	public void getIndividualOrder(SmartConnect smartConnect, String orderId) throws SmartAPIException, IOException {
 		JSONObject jsonObject = smartConnect.getIndividualOrderDetails(orderId);
 		log.info("response {} ", jsonObject);
+	}
+
+	/**
+	 * Order update websocket
+	 *
+	 * To retrieve order update websocket data
+	 * @param accessToken
+	 */
+	public void orderUpdateUsage(String accessToken){
+		OrderUpdateWebsocket orderUpdateWebsocket = new OrderUpdateWebsocket(accessToken, new OrderUpdateListner() {
+			/**
+			 * Check if the websocket is connected or not
+			 */
+			@Override
+			public void onConnected() {
+				log.info("order update websocket connected");
+			}
+
+			/**
+			 * Handle the onDisconnected event
+			 */
+			@Override
+			public void onDisconnected() {
+
+			}
+
+			/**
+			 * Handle the onError event
+			 * @param error
+			 */
+			@Override
+			public void onError(SmartStreamError error) {
+
+			}
+
+			/**
+			 * Handle the onPong event
+			 */
+			@Override
+			public void onPong() {
+
+			}
+
+			/**
+			 * Handle the onOrderUpdate event
+			 * @param data
+			 */
+			@Override
+			public void onOrderUpdate(String data) {
+				log.info("order update data {} ",data);
+			}
+		});
 	}
 }

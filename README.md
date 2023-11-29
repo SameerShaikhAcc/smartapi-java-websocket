@@ -1,4 +1,4 @@
-# SmartAPI 2.1.0 Java client
+# SmartAPI 2.2.0 Java client
 The official Java client for communicating with [SmartAPI Connect API](https://smartapi.angelbroking.com).
 
 SmartAPI is a set of REST-like APIs that expose many capabilities required to build a complete investment and trading platform. Execute orders in real-time, manage user portfolios, stream live market data (WebSockets), and more, with the simple HTTP API collection.
@@ -10,7 +10,7 @@ SmartAPI is a set of REST-like APIs that expose many capabilities required to bu
 ## Usage
 - [Download SmartAPI jar file](https://github.com/angel-one/smartapi-java/blob/main/dist/) and include it in your build path.
 
-- Include com.angelbroking.smartapi into build path from maven. Use version 2.1.0
+- Include com.angelbroking.smartapi into build path from maven. Use version 2.2.0
 
 ## API usage
 ```java
@@ -368,7 +368,6 @@ public void getMarginDetails(SmartConnect smartConnect) throws SmartAPIException
 }
 
 ```
-For more details, take a look at Examples.java in the sample directory.
 
 ## WebSocket live streaming data
 
@@ -496,3 +495,81 @@ For more details, take a look at Examples.java in the sample directory.
 ```
 For more details, take a look at Examples.java in the sample directory.
 
+
+## Order Websocket Data
+
+```java
+
+    /* Order Websocket */
+    String userClientId = "<clientId>";
+    User userGenerateSession = smartConnect.generateSession("<clientId>", "<password>", "<totp>");
+    smartConnect.setAccessToken(userGenerateSession.getAccessToken());
+    smartConnect.setUserId(userGenerateSession.getUserId());
+    String accessToken = userGenerateSession.getAccessToken();
+    
+    examples.orderUpdateUsage(accessToken);
+
+    /**
+     * Order update websocket
+     *
+     * To retrieve order update websocket data
+     * @param accessToken
+     */
+    public void orderUpdateUsage(String accessToken){
+            OrderUpdateWebsocket orderUpdateWebsocket = new OrderUpdateWebsocket(accessToken, new OrderUpdateListner() {
+    /**
+     * Check if the websocket is connected or not
+     */
+    @Override
+    public void onConnected() {
+        
+        log.info("order update websocket connected");
+        
+    }
+
+    /**
+     * Handle the onDisconnected event
+     */
+    @Override
+    public void onDisconnected() {
+        
+        log.info("order update websocket disconnected");
+        
+    }
+
+    /**
+     * Handle the onError event
+     * @param error
+     */
+    @Override
+    public void onError(SmartStreamError error) {
+        
+        log.info("on error event");
+        
+    }
+
+    /**
+     * Handle the onPong event
+     */
+    @Override
+    public void onPong() {
+        
+        log.info("or pong event");
+        
+    }
+
+    /**
+     * Handle the onOrderUpdate event
+     * @param data
+     */
+    @Override
+    public void onOrderUpdate(String data) {
+        
+        log.info("order update data {} ",data);
+            
+     }});
+            
+    }
+
+```
+For more details, take a look at Examples.java in the sample directory.

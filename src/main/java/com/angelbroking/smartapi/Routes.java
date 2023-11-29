@@ -18,6 +18,7 @@ public class Routes {
 	private static String _wsuri = "wss://wsfeeds.angelbroking.com/NestHtml5Mobile/socket/stream";
 	private static String _smartStreamWSURI = "wss://smartapisocket.angelone.in/smart-stream";
 	private static String _swsuri = "wss://smartapisocket.angelbroking.com/websocket";
+	private static String _orderUpdateUri = "wss://tns.angelone.in/smart-order-update";
 
 	// Initialize all routes,
 	@SuppressWarnings("serial")
@@ -71,5 +72,9 @@ public class Routes {
 	
 	public String getSmartStreamWSURI() {
 		return _smartStreamWSURI;
+	}
+
+	public String getOrderUpdateUri() {
+		return _orderUpdateUri;
 	}
 }
